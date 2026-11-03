@@ -244,12 +244,6 @@
       "type": "page"
     },
     {
-      "path": "/elevate",
-      "title": "Get Trained. Get Certified. Get Hired.",
-      "description": "The only L&D provider in India and Saudi Arabia that doesn’t just make you job-ready—we get you the job. Master Internal Audit, ESG, Cybersecurity, and Business Operations in 2 hours to 2 days, then let our…",
-      "type": "page"
-    },
-    {
       "path": "/transforming-professionals",
       "title": "Elevating Professionals, Transforming Organizations",
       "description": "Founded by the team behind BnC Global—a trusted consulting firm serving 500+ clients across India and Saudi Arabia—Elevate was born from a simple observation: the best learning happens at the intersection…",
@@ -459,7 +453,8 @@
     "/countires-we-serve/canada": "/countries-we-serve/canada",
     "/countires-we-serve/saudi-arabia": "/countries-we-serve/saudi-arabia",
     "/countires-we-serve/uae": "/countries-we-serve/uae",
-    "/careers/elevate": "/elevate",
+    "/elevate": "https://elevate.bncglobal.in/",
+    "/careers/elevate": "https://elevate.bncglobal.in/",
     "/careers/transforming-professionals": "/transforming-professionals",
     "/careers/communities": "/communities"
   },

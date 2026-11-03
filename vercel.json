@@ -64,8 +64,13 @@
       "permanent": true
     },
     {
+      "source": "/elevate",
+      "destination": "https://elevate.bncglobal.in/",
+      "permanent": true
+    },
+    {
       "source": "/careers/elevate",
-      "destination": "/elevate",
+      "destination": "https://elevate.bncglobal.in/",
       "permanent": true
     },
     {

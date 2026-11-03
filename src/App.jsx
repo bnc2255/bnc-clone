@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
 import SiteSEO from './seo/SiteSEO'
@@ -13,7 +14,6 @@ import CareersSubPage from './pages/CareersSubPage'
 import CountryDetail from './pages/CountryDetail'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import NotFound from './pages/NotFound'
-import Elevate from './pages/Elevate'
 import Australia from './pages/Australia'
 import Canada from './pages/Canada'
 import SaudiArabia from './pages/SaudiArabia'
@@ -55,12 +55,19 @@ import MeetOurTeam from './pages/MeetOurTeam'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
 
+function ExternalRedirect({ to }) {
+  useEffect(() => {
+    window.location.replace(to)
+  }, [to])
+  return <p>Redirecting to <a href={to}>Elevate</a>…</p>
+}
+
 function App() {
   return (
     <BrowserRouter>
       <SiteSEO />
       <Routes>
-        {Object.entries(site.redirects).map(([from, to]) => <Route key={from} path={from} element={<Navigate to={to} replace />} />)}
+        {Object.entries(site.redirects).map(([from, to]) => <Route key={from} path={from} element={to.startsWith('https://') ? <ExternalRedirect to={to} /> : <Navigate to={to} replace />} />)}
         {/* Pages wrapped in the common Header/Footer Layout */}
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
@@ -109,7 +116,6 @@ function App() {
 
 
           {/* Top-level Careers Sub-Routes to match live site exactly */}
-          <Route path="elevate" element={<Elevate />} />
           <Route path="transforming-professionals" element={<TransformingProfessionals />} />
           <Route path="communities" element={<Communities />} />
 

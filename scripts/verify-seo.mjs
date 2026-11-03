@@ -35,7 +35,7 @@ await new Promise(done=>server.listen(0,'127.0.0.1',done));const base='http://12
 let browser;
 try{
  const missing=await fetch(base+'/definitely-missing-audit-page');assert.equal(missing.status,404);
- for(const [from,to] of Object.entries(site.redirects)){const r=await fetch(base+from,{redirect:'manual'});assert.equal(r.status,308);assert.equal(r.headers.get('location'),to);assert.ok(site.routes.some(p=>p.path===to),'Redirect destination '+to);}
+ for(const [from,to] of Object.entries(site.redirects)){const r=await fetch(base+from,{redirect:'manual'});assert.equal(r.status,308);assert.equal(r.headers.get('location'),to);assert.ok(to.startsWith('https://') || site.routes.some(p=>p.path===to),'Redirect destination '+to);}
  assert.match(await (await fetch(base+'/robots.txt')).text(),/Sitemap:/);
  browser=await playwright.launch({executablePath:process.env.PRERENDER_CHROME_PATH||await chromium.executablePath(),args:chromium.args,headless:true});
  const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}});
