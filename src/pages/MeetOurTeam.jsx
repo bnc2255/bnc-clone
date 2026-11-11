@@ -1,174 +1,111 @@
 import { Linkedin } from 'lucide-react'
-import imgSummit from '../assets/team_summit.png'
-import imgGurvinder from '../assets/team_gurvinder.png'
-import imgKarandeep from '../assets/team_karandeep.png'
-import imgSushmeet from '../assets/team_sushmeet.png'
-import imgPraveen from '../assets/team_praveen.png'
-import imgSaurabh from '../assets/team_saurabh.png'
-import imgPankhuri from '../assets/team_pankhuri.png'
-import imgPranav from '../assets/team_pranav.png'
-import imgAnwar from '../assets/team_anwar.png'
-import imgShailesh from '../assets/team_shailesh.png'
+import imgSummit from '../assets/team_summit_reference.jpeg'
+import imgGurvinder from '../assets/team_gurvinder_reference.jpeg'
+import imgPraveen from '../assets/team_praveen_reference.jpeg'
+import imgKarandeep from '../assets/team_karandeep_reference.jpeg'
+import imgAnwar from '../assets/team_anwar_reference.jpeg'
+import imgPankhuri from '../assets/team_pankhuri_reference.jpeg'
+import imgRaghav from '../assets/team_raghav_reference.jpeg'
+
+const members = [
+  {
+    name: 'Summit Goyal',
+    role: 'Founder & Global Head',
+    expertise: ['Internal Audit, ERM', 'SOP, SOX, ICFR', 'IT Audits / Data Analytics'],
+    img: imgSummit,
+    linkedin: 'https://www.linkedin.com/in/summit-goyal-00457a23/',
+  },
+  {
+    name: 'Gurvinder Singh',
+    role: 'Co-Founder',
+    expertise: ['Risk Consulting', 'Process Automation', 'Regulatory & Compliance'],
+    img: imgGurvinder,
+    linkedin: 'https://www.linkedin.com/in/gurvinder-singh-338565a/',
+  },
+  {
+    name: 'Praveen Ladha',
+    role: 'KSA Practice Head',
+    expertise: ['Retail & Digital Banking', 'Transformation & Strategic Consulting'],
+    img: imgPraveen,
+    linkedin: 'https://www.linkedin.com/in/praveenladha/',
+  },
+  {
+    name: 'Karandeep Singh',
+    role: 'GCC & CFO Practice',
+    expertise: ['Consumer Tech: Flipkart, Simplilearn, KPMG CFOs', 'Retail & GCCs: Tesco Business Services CFO', 'Gaming & Esports'],
+    img: imgKarandeep,
+    linkedin: 'https://www.linkedin.com/in/kdsttb/',
+  },
+  {
+    name: 'Anwar Akhtar',
+    role: 'Cybersecurity Practice Head',
+    expertise: ['GRC, DPDPA Implementation', 'CISA, CISM, ISO 27001 Lead Auditor', 'GDPR, HIPAA, PCI DSS'],
+    img: imgAnwar,
+    linkedin: 'https://www.linkedin.com/in/anwarakhtar-62a3b218/',
+  },
+  {
+    name: 'Pankhuri Jain',
+    role: 'Climate Change Advisory',
+    expertise: ['Cross-Sector Expertise', 'Sustainability Focus', 'Collaborative Approach'],
+    img: imgPankhuri,
+    linkedin: 'https://www.linkedin.com/in/pankhuri-jain-2b115a159/',
+  },
+  {
+    name: 'Raghav Aggarwal',
+    role: 'Direct Tax, Value Tax & Insolvency',
+    expertise: ['Foundations of compliance', 'Partners in growth'],
+    img: imgRaghav,
+  },
+]
 
 export default function MeetOurTeam() {
-  const sections = [
-    {
-      name: 'Founder Team',
-      members: [
-        {
-          name: 'Summit Goyal',
-          role: 'Founder',
-          desc: 'Summit has 18+ years of consulting experience across multiple sectors. A CA (AIR 50) and former KPMG professional, he advises global firms on CFO services, finance transformation, ERM, GRC, and strategic MIS.',
-          img: imgSummit
-        },
-        {
-          name: 'Gurvinder Singh',
-          role: 'Co-Founder',
-          desc: 'Chartered Accountant with 21+ years of experience in assurance and risk management across multiple sectors. Formerly with KPMG, Aon Hewitt, and MetLife, he specializes in ICFR, internal audits, controls, process automation, and finance transformation.',
-          img: imgGurvinder
-        }
-      ]
-    },
-    {
-      name: 'Senior Team',
-      members: [
-        {
-          name: 'Karandeep Singh',
-          role: 'GCC & CFO Practice',
-          desc: 'Advising corporate scaling programs and multinational GCC operations. Deep background in Consumer Tech (Flipkart, Simplilearn, KPMG), Retail & GCCs (Tesco Business Services), and Gaming & Esports.',
-          img: imgKarandeep
-        },
-        {
-          name: 'Sushmeet Singh',
-          role: 'Digital Transformation',
-          desc: 'Steering stakeholder alignment, scope finalization, operations governance, system integrations, and multi-country team mobilization.',
-          img: imgSushmeet
-        },
-        {
-          name: 'Praveen Ladha',
-          role: 'KSA Country Head',
-          desc: 'Overseeing Middle East business growth and corporate setups. Expert in Retail & Digital Banking, Transformation & Strategic Consulting.',
-          img: imgPraveen
-        }
-      ]
-    },
-    {
-      name: 'ESG Advisory Team',
-      members: [
-        {
-          name: 'Saurabh Verma',
-          role: 'UK Division Head',
-          desc: 'Structuring European institutional relations. Expert in Climate & Risk Advisory, Banking, and Asset Management.',
-          img: imgSaurabh
-        },
-        {
-          name: 'Pankhuri Jain',
-          role: 'Social Practice Head',
-          desc: 'Structuring social impact standards. Expert in ESG & Sustainability, Strategic Leadership, and Impact-Driven Solutions.',
-          img: imgPankhuri
-        },
-        {
-          name: 'Pranav Bhardwaj',
-          role: 'ESG Practice Head',
-          desc: 'Leading regulatory environmental audits. Expert in Cross-Sector Experience, Sustainability Focus, and Collaborative Approach.',
-          img: imgPranav
-        }
-      ]
-    },
-    {
-      name: 'Privacy & Growth Team',
-      members: [
-        {
-          name: 'Anwar Akhtar',
-          role: 'Cyber Security Head',
-          desc: 'Managing data protection. Expert in GRC & DPDPA implementation; CISA, CISM, ISO 27001 Lead Auditor; GDPR, HIPAA, PCI DSS.',
-          img: imgAnwar
-        },
-        {
-          name: 'Shailesh Dayal',
-          role: 'Growth Strategist',
-          desc: 'Directing training formats. Expert in Leadership training, business podcasts, and corporate workshops.',
-          img: imgShailesh
-        }
-      ]
-    }
-  ]
-
   return (
-    <div className="bg-white text-slate-800 antialiased font-sans">
-      
-      {/* Hero Header */}
-      <section className="py-20 bg-gradient-to-br from-[#00305B] to-[#0A2F5B] text-white text-center">
-        <div className="max-w-4xl mx-auto px-4 space-y-4">
-          <h1 className="text-3xl md:text-5xl font-display font-extrabold tracking-normal">
-            Meet Our Team
-          </h1>
-          <p className="text-base md:text-lg text-[#BFD9ED] max-w-2xl mx-auto font-sans leading-relaxed">
-            Our multi-disciplinary experts bring global consulting, risk assurance, and compliance experience to guide your organization scaling.
+    <main className="bg-white text-slate-800 antialiased font-sans">
+      <section className="bg-gradient-to-br from-[#00305B] to-[#0A2F5B] px-4 py-16 text-center text-white md:py-20">
+        <div className="mx-auto max-w-4xl space-y-4">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#A3D9F6]">Team Profile</p>
+          <h1 className="font-display text-3xl font-extrabold md:text-5xl">Meet Our Team</h1>
+          <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#BFD9ED] md:text-lg">
+            Experienced leaders across risk, finance, tax, cybersecurity, and sustainability.
           </p>
         </div>
       </section>
 
-      {/* Team Sections */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
-          {sections.map((sec, idx) => (
-            <div key={idx} className="space-y-10">
-              
-              {/* Category Title */}
-              <div className="border-b border-slate-100 pb-4">
-                <h2 className="text-2xl md:text-3xl font-display font-extrabold text-[#00305B] tracking-tight">
-                  {sec.name}
-                </h2>
+      <section className="px-4 py-12 sm:px-6 md:py-16 lg:px-8">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-x-7 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {members.map((member, index) => (
+            <article key={member.name} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-shadow hover:shadow-lg">
+              <div className="aspect-[4/3] overflow-hidden border-b border-[#1D67CD] bg-slate-50">
+                <img src={member.img} alt={member.name} className={`h-full w-full object-cover object-top ${index < 3 ? 'origin-top scale-[1.3]' : ''}`} />
               </div>
-
-              {/* Members Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {sec.members.map((member, mIdx) => (
-                  <div 
-                    key={mIdx} 
-                    className="bg-slate-50 border border-slate-200 rounded-3xl overflow-hidden hover:shadow-md transition-shadow flex flex-col justify-between"
-                  >
-                    <div>
-                      {/* Photo */}
-                      <div className="relative aspect-[4/5] w-full overflow-hidden bg-slate-100">
-                        <img 
-                          src={member.img} 
-                          alt={member.name} 
-                          className="w-full h-full object-cover filter brightness-[1.02] contrast-[0.98] transition-transform duration-300 hover:scale-[1.03]"
-                        />
-                      </div>
-
-                      {/* Info */}
-                      <div className="p-6 space-y-3">
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <h3 className="text-lg font-extrabold text-[#00305B] font-sans">{member.name}</h3>
-                            <p className="text-xs font-semibold text-[#1D67CD] mt-0.5">{member.role}</p>
-                          </div>
-                          <a 
-                            href="https://linkedin.com" 
-                            target="_blank" 
-                            rel="noreferrer"
-                            className="p-1.5 rounded-lg bg-slate-200/50 hover:bg-[#1D67CD]/10 text-slate-500 hover:text-[#1D67CD] transition-colors"
-                          >
-                            <Linkedin className="w-4 h-4" />
-                          </a>
-                        </div>
-                        <p className="text-xs text-slate-500 font-avenir leading-relaxed">
-                          {member.desc}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+              <div className="p-5">
+                <div className="flex items-start justify-between gap-3">
+                  <h2 className="font-display text-xl font-extrabold uppercase tracking-wide text-[#00305B]">{member.name}</h2>
+                  {member.linkedin && (
+                    <a
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`${member.name} on LinkedIn`}
+                      title={`${member.name} on LinkedIn`}
+                      className="mt-0.5 shrink-0 rounded-md p-1 text-[#0A66C2] transition-colors hover:bg-blue-50 hover:text-[#004182] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A66C2]"
+                    >
+                      <Linkedin className="h-5 w-5" aria-hidden="true" />
+                    </a>
+                  )}
+                </div>
+                <p className="mt-2 min-h-12 text-base font-medium leading-snug text-[#1D67CD]">{member.role}</p>
+                <div className="mt-4 text-sm leading-relaxed text-slate-600">
+                  <p className="font-bold text-slate-700">Expertise:</p>
+                  <ul className="mt-1 list-disc space-y-1 pl-5">
+                    {member.expertise.map((item) => <li key={item}>{item}</li>)}
+                  </ul>
+                </div>
               </div>
-
-            </div>
+            </article>
           ))}
         </div>
       </section>
-
-    </div>
+    </main>
   )
 }
