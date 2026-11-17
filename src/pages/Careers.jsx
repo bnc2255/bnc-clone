@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
+import { MAX_RESUME_BYTES, submitCareerApplication } from '../services/careerApplication'
 import careersHero from '../assets/careers_hero.png'
 import careersStaffing from '../assets/careers_staffing.png'
 import careersFooter from '../assets/careers_footer.webp'
@@ -6,6 +7,10 @@ import { Mail, CheckCircle2, MessageSquare, ArrowRight, User, GraduationCap, Bri
 
 export default function Careers() {
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState('')
+  const submission = useRef(null)
+  const submitting = useRef(false)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -23,18 +28,41 @@ export default function Careers() {
   }
 
   const handleFileChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setFormData(prev => ({ ...prev, cv: e.target.files[0] }))
-    }
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    if (!formData.name || !formData.email || !formData.phone || !formData.address || formData.position === 'Select position' || !formData.joiningDate || !formData.experience) {
-      alert('Please fill out all required fields.')
+    const file = e.target.files?.[0]
+    setError('')
+    if (file && (!/\.pdf$/i.test(file.name) || !file.size || file.size > MAX_RESUME_BYTES)) {
+      setError('Please attach a PDF resume no larger than 10 MB.')
+      e.target.value = ''
+      setFormData(prev => ({ ...prev, cv: null }))
       return
     }
-    setIsSubmitted(true)
+    setFormData(prev => ({ ...prev, cv: file || null }))
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if (submitting.current) return
+    setError('')
+    if (['name', 'email', 'phone', 'address', 'joiningDate', 'experience'].some(key => !formData[key].trim()) || formData.position === 'Select position' || !formData.cv) {
+      setError('Please complete all required fields and attach your PDF resume.')
+      return
+    }
+    const { cv, ...fields } = formData
+    const fingerprint = JSON.stringify({ ...fields, file: [cv.name, cv.size, cv.lastModified] })
+    if (submission.current?.fingerprint !== fingerprint) {
+      submission.current = { fingerprint, id: crypto.randomUUID() }
+    }
+    submitting.current = true
+    setIsSubmitting(true)
+    try {
+      await submitCareerApplication(formData, submission.current.id)
+      setIsSubmitted(true)
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      submitting.current = false
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -183,24 +211,27 @@ export default function Careers() {
                   Thank you for applying to BNC. Our recruitment panel will review your credentials and contact you shortly.
                 </p>
                 <button
-                  onClick={() => { setIsSubmitted(false); setFormData({ name:'', email:'', phone:'', address:'', position:'Select position', joiningDate:'', experience:'', cv:null }); }}
+                  onClick={() => { submission.current = null; setError(''); setIsSubmitted(false); setFormData({ name:'', email:'', phone:'', address:'', position:'Select position', joiningDate:'', experience:'', cv:null }); }}
                   className="px-6 py-2 rounded-full font-bold bg-[#1D67CD] text-white hover:bg-blue-600 transition-colors text-sm cursor-pointer"
                 >
                   Submit Another Profile
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6" aria-busy={isSubmitting}>
+                {error && <p role="alert" className="rounded-xl bg-red-50 p-4 text-sm text-red-800">{error}</p>}
+                <fieldset disabled={isSubmitting} className="space-y-6 min-w-0">
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {/* Name */}
                   <div className="space-y-1">
-                    <label className="text-xs font-bold text-slate-700 uppercase flex items-center gap-1.5">
+                    <label htmlFor="career-name" className="text-xs font-bold text-slate-700 uppercase flex items-center gap-1.5">
                       <User className="w-3.5 h-3.5 text-slate-400" />
                       Full Name *
                     </label>
                     <input
                       type="text"
+                      id="career-name"
                       name="name"
                       required
                       value={formData.name}
@@ -212,12 +243,13 @@ export default function Careers() {
 
                   {/* Email */}
                   <div className="space-y-1">
-                    <label className="text-xs font-bold text-slate-700 uppercase flex items-center gap-1.5">
+                    <label htmlFor="career-email" className="text-xs font-bold text-slate-700 uppercase flex items-center gap-1.5">
                       <Mail className="w-3.5 h-3.5 text-slate-400" />
                       Email Address *
                     </label>
                     <input
                       type="email"
+                      id="career-email"
                       name="email"
                       required
                       value={formData.email}
@@ -231,12 +263,13 @@ export default function Careers() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {/* Mobile */}
                   <div className="space-y-1">
-                    <label className="text-xs font-bold text-slate-700 uppercase flex items-center gap-1.5">
+                    <label htmlFor="career-phone" className="text-xs font-bold text-slate-700 uppercase flex items-center gap-1.5">
                       <Phone className="w-3.5 h-3.5 text-slate-400" />
                       Mobile Number *
                     </label>
                     <input
                       type="tel"
+                      id="career-phone"
                       name="phone"
                       required
                       value={formData.phone}
@@ -248,12 +281,13 @@ export default function Careers() {
 
                   {/* Address */}
                   <div className="space-y-1">
-                    <label className="text-xs font-bold text-slate-700 uppercase flex items-center gap-1.5">
+                    <label htmlFor="career-address" className="text-xs font-bold text-slate-700 uppercase flex items-center gap-1.5">
                       <MapPin className="w-3.5 h-3.5 text-slate-400" />
                       Address *
                     </label>
                     <input
                       type="text"
+                      id="career-address"
                       name="address"
                       required
                       value={formData.address}
@@ -267,11 +301,12 @@ export default function Careers() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {/* Position */}
                   <div className="space-y-1">
-                    <label className="text-xs font-bold text-slate-700 uppercase flex items-center gap-1.5">
+                    <label htmlFor="career-position" className="text-xs font-bold text-slate-700 uppercase flex items-center gap-1.5">
                       <GraduationCap className="w-3.5 h-3.5 text-slate-400" />
                       Applying For *
                     </label>
                     <select
+                      id="career-position"
                       name="position"
                       required
                       value={formData.position}
@@ -288,12 +323,13 @@ export default function Careers() {
 
                   {/* Date Picker */}
                   <div className="space-y-1">
-                    <label className="text-xs font-bold text-slate-700 uppercase flex items-center gap-1.5">
+                    <label htmlFor="career-joiningDate" className="text-xs font-bold text-slate-700 uppercase flex items-center gap-1.5">
                       <Calendar className="w-3.5 h-3.5 text-slate-400" />
                       Tentative Joining Date *
                     </label>
                     <input
                       type="date"
+                      id="career-joiningDate"
                       name="joiningDate"
                       required
                       value={formData.joiningDate}
@@ -306,37 +342,39 @@ export default function Careers() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {/* Experience */}
                   <div className="space-y-1">
-                    <label className="text-xs font-bold text-slate-700 uppercase flex items-center gap-1.5">
+                    <label htmlFor="career-experience" className="text-xs font-bold text-slate-700 uppercase flex items-center gap-1.5">
                       <Briefcase className="w-3.5 h-3.5 text-slate-400" />
                       Years of Experience *
                     </label>
                     <input
                       type="text"
+                      id="career-experience"
                       name="experience"
                       required
                       value={formData.experience}
                       onChange={handleInputChange}
-                      placeholder="year of experiene"
+                      placeholder="e.g. 3"
                       className="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#1D67CD]"
                     />
                   </div>
 
                   {/* CV Upload */}
                   <div className="space-y-1">
-                    <label className="text-xs font-bold text-slate-700 uppercase flex items-center gap-1.5">
+                    <label htmlFor="career-resume" className="text-xs font-bold text-slate-700 uppercase flex items-center gap-1.5">
                       <UploadCloud className="w-3.5 h-3.5 text-slate-400" />
-                      Upload Your CV * (PDF, Word max 15MB)
+                      Upload Your CV * (PDF, max 10 MB)
                     </label>
-                    <div className="relative border-2 border-dashed border-slate-200 hover:border-[#1D67CD] rounded-2xl p-3 text-center cursor-pointer transition-colors bg-slate-50/50">
+                    <div className="relative border-2 border-dashed border-slate-200 hover:border-[#1D67CD] focus-within:ring-2 focus-within:ring-[#1D67CD] rounded-2xl p-3 text-center cursor-pointer transition-colors bg-slate-50/50">
                       <input
                         type="file"
-                        accept=".pdf,.doc,.docx"
+                        id="career-resume"
+                        accept=".pdf,application/pdf"
                         required
                         onChange={handleFileChange}
                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                       />
                       <span className="text-slate-500 text-xs font-medium">
-                        {formData.cv ? formData.cv.name : 'Click to select file or drag here'}
+                        {formData.cv ? formData.cv.name : 'Click to select a PDF'}
                       </span>
                     </div>
                   </div>
@@ -345,12 +383,13 @@ export default function Careers() {
                 <div className="pt-4 flex justify-end">
                   <button
                     type="submit"
-                    className="px-8 py-3 rounded-full font-bold bg-[#1D67CD] text-white hover:bg-blue-600 transition-colors text-sm cursor-pointer"
+                    className="disabled:opacity-60 disabled:cursor-wait px-8 py-3 rounded-full font-bold bg-[#1D67CD] text-white hover:bg-blue-600 transition-colors text-sm cursor-pointer"
                   >
-                    Next
+                    {isSubmitting ? 'Submitting…' : 'Submit Application'}
                   </button>
                 </div>
 
+                </fieldset>
               </form>
             )}
           </div>

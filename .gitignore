@@ -35,3 +35,6 @@ public/content/
 seo-build.json
 .vercel
 .env*
+
+# Local browser verification artifacts
+.playwright-mcp/

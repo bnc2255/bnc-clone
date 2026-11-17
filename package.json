@@ -9,7 +9,8 @@
     "build": "node scripts/prepare-seo.mjs && vite build && node scripts/prerender.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test:seo": "node scripts/verify-seo.mjs"
+    "test:seo": "node scripts/verify-seo.mjs",
+    "test:careers": "node --test tests/career-application.test.mjs"
   },
   "dependencies": {
     "@fontsource-variable/wix-madefor-display": "^5.2.8",
