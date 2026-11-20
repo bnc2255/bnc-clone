@@ -6,7 +6,8 @@ import ServiceAnswers from '../seo/ServiceAnswers'
 export default function Layout() {
   const location = useLocation()
   const isLanding = location.pathname === '/'
-  const variant = isLanding ? 'landing' : 'default'
+  const isPartnerAbout = ['/about/company', '/about/founders'].includes(location.pathname)
+  const variant = isPartnerAbout ? 'partner' : isLanding ? 'landing' : 'default'
 
   return (
     <div className="flex flex-col min-h-screen bg-white text-slate-800 antialiased font-sans selection:bg-[#1D67CD] selection:text-white">
@@ -17,7 +18,7 @@ export default function Layout() {
         Skip to main content
       </a>
       <Header variant={variant} />
-      <main id="main-content" tabIndex={-1} className="flex-grow outline-none">
+      <main id="main-content" tabIndex={-1} className={`flex-grow outline-none ${isPartnerAbout ? 'pt-20' : ''}`}>
         <Outlet />
         <ServiceAnswers />
       </main>

@@ -12,7 +12,7 @@ export default function Overview() {
         <div className="grid gap-10 lg:grid-cols-[1.35fr_1fr] lg:items-center">
           <div>
             <Eyebrow>Section 01 · About the Company</Eyebrow>
-            <SplitHeading as="h2" className="ob-h1 mt-5">
+            <SplitHeading as="h1" className="ob-h1 mt-5">
               Welcome to <b>BNC Global.</b>
             </SplitHeading>
             <Reveal delay={0.15}>

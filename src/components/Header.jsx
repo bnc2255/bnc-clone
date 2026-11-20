@@ -267,15 +267,17 @@ export default function Header({ variant = 'default' }) {
     )
   }
 
-  // --- Default Variant (Original tall white header for interior pages) ---
+  const isPartner = variant === 'partner'
+
+  // The imported About pages use the partner site's 76px overlay header spacing.
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-slate-100 shadow-sm font-display h-[115px] flex items-center">
+    <header className={`${isPartner ? 'fixed left-0 right-0 top-0 h-[76px] bg-gradient-to-b from-white/25 to-white/10 backdrop-blur-[22px] backdrop-saturate-[1.8] shadow-[inset_0_-1px_0_rgba(255,255,255,0.6),0_1px_0_rgba(0,0,0,0.04)]' : 'sticky top-0 bg-white border-b border-slate-100 shadow-sm h-[115px]'} z-50 font-display flex items-center`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="flex justify-between h-[115px] items-center">
+        <div className={`flex justify-between ${isPartner ? 'h-[76px]' : 'h-[115px]'} items-center`}>
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
             <Link to="/" className="flex items-center rounded focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:outline-none" aria-label="BNC Global Home Page">
-              <img className="h-[63px] w-[137px] object-contain" src={headerLogo} alt="BNC Global Logo" />
+              <img className={`${isPartner ? 'h-[38px] w-auto' : 'h-[63px] w-[137px]'} object-contain`} src={headerLogo} alt="BNC Global Logo" />
             </Link>
           </div>
 
@@ -367,7 +369,7 @@ export default function Header({ variant = 'default' }) {
 
       {/* Mobile Drawer */}
       {isOpen && (
-        <div className="lg:hidden border-t border-slate-100 bg-white py-4 px-4 space-y-2 absolute top-[115px] left-0 right-0 shadow-lg z-50 animate-in slide-in-from-top duration-200">
+        <div className={`lg:hidden border-t border-slate-100 bg-white py-4 px-4 space-y-2 absolute ${isPartner ? 'top-[76px]' : 'top-[115px]'} left-0 right-0 shadow-lg z-50 animate-in slide-in-from-top duration-200`}>
           {navLinks.map((link, idx) => {
             if (link.dropdown) {
               return (

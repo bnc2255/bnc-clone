@@ -1,4 +1,5 @@
 import AboutCompany from './company/AboutCompany';
+import './partner-baseline.css';
 import './onboarding-styles.css';
 
 // /about/company: "About the Company", copied from the Universe One onboarding

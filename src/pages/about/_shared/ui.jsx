@@ -31,10 +31,9 @@ export function Reveal({ children, delay = 0, y = 14, className = '', as = 'div'
 /** Staggers direct <RevealItem> children. */
 export function RevealGroup({ children, className = '', stagger = 0.04 }) {
   const reduce = useReducedMotion();
-  const [ref, first] = useFirstScreen();
+  const [, first] = useFirstScreen();
   return (
     <motion.div
-      ref={ref}
       className={className}
       initial={reduce ? false : 'hidden'}
       {...(first ? { animate: 'show' } : { whileInView: 'show', viewport: { once: true, margin: '0px 0px 8% 0px' } })}

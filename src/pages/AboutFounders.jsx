@@ -1,57 +1,49 @@
-import { ArrowUpRight } from 'lucide-react'
-import './about-founders.css'
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const assets = '/about-founders/assets/'
-const founders = [
-  {
-    id: 'gurvinder', name: 'CA Gurvinder Pal Singh', role: 'Co-Founder & Managing Director',
-    avatar: 'avatar-gps.png', portrait: 'gurvinder-pal-singh.png', years: '21+', credential: 'SRSB', detail: 'ICAI Special Invitee',
-    bio: 'Co-Founder & Managing Director of BNC Global, with 21+ years of experience spanning Big 4 consulting, enterprise risk management, internal audit, governance and business transformation. He has a proven track record of building consulting, outsourcing, GCC and staffing businesses, and of helping organisations improve performance through risk advisory, automation and strategic growth.',
-  },
-  {
-    id: 'summit', name: 'CA Summit Goyal', role: 'Founder, India–Saudi Corridor',
-    avatar: 'avatar-sg.png', portrait: 'summit-goyal.png', years: '18+', credential: 'AIR 50', detail: 'CA All India Rank',
-    bio: 'Founder and business leader with 18+ years of consulting experience, leading BNC Global’s India–Saudi business corridor and international alliances. A Chartered Accountant and former KPMG consultant, he brings deep expertise in governance, enterprise risk, business transformation and cross-border market expansion.',
-  },
-]
-
+// /about: "About the Founders" (the BNC Global founders site, copied from the
+// Universe One onboarding module into public/about-founders). It runs in an
+// iframe so its own smooth scrolling, pinned sections and 3D globe keep working.
+// Its closing "Continue" button opens /about/company.
 export default function AboutFounders() {
+  const [loaded, setLoaded] = useState(false);
+  const frameRef = useRef(null);
+  const navigate = useNavigate();
+
+  // show "Continue to About the Company"; "Mark as read" only applies inside onboarding
+  function sync() {
+    const win = frameRef.current?.contentWindow;
+    if (!win) return;
+    win.postMessage({ source: 'ob-shell', isRead: false, nextTitle: 'About the Company', hasNext: true }, window.location.origin);
+    const read = win.document?.getElementById('obRead');
+    if (read) read.style.display = 'none';
+  }
+
+  useEffect(() => {
+    const onMessage = (e) => {
+      if (e.origin !== window.location.origin || e.source !== frameRef.current?.contentWindow || e.data?.source !== 'ob-founders') return;
+      if (e.data.type === 'ready') sync();
+      if (e.data.type === 'next') navigate('/about/company');
+    };
+    window.addEventListener('message', onMessage);
+    return () => window.removeEventListener('message', onMessage);
+  }, [navigate]);
+
   return (
-    <div className="founders-page">
-      <section className="founders-hero" aria-labelledby="founders-title">
-        <div className="founders-copy">
-          <p className="founders-eyebrow">The founders</p>
-          <h1 id="founders-title"><span>Two founders, one proven track record,</span><br />built on <em>Big 4 discipline.</em></h1>
+    <section aria-label="About the Founders" className="relative -mt-20 w-full bg-white">
+      <h1 className="sr-only">About the Founders — CA Summit Goyal and CA Gurvinder Pal Singh</h1>
+      {!loaded ? (
+        <div className="absolute inset-0 grid place-items-center">
+          <span className="h-9 w-9 animate-spin rounded-full border-[3px] border-[#1d1d1f] border-t-transparent" aria-label="Loading" />
         </div>
-        <div className="founders-photo"><img src={`${assets}founders-duo.png`} alt="CA Gurvinder Pal Singh and CA Summit Goyal, founders of BNC Global" fetchPriority="high" width="1015" height="901" /></div>
-        <div className="founders-cards">
-          {founders.map(founder => (
-            <a key={founder.id} href={`#${founder.id}`} className="founder-card" aria-label={`View profile of ${founder.name}`}>
-              <div className="founder-card-head">
-                <img src={assets + founder.avatar} alt="" width="40" height="40" />
-                <div><strong>{founder.name}</strong><span>{founder.role}</span></div>
-              </div>
-              <div className="founder-stats">
-                <div><b>{founder.years}</b><span>Years of experience</span></div>
-                <div><b>{founder.credential}</b><span>{founder.detail}</span></div>
-                <ArrowUpRight size={28} aria-hidden="true" />
-              </div>
-            </a>
-          ))}
-        </div>
-      </section>
-      {founders.map(founder => (
-        <section key={founder.id} id={founder.id} className="founder-profile" aria-labelledby={`${founder.id}-name`}>
-          <div className="founder-portrait"><img src={assets + founder.portrait} alt={founder.name} loading="lazy" width="800" height="900" /></div>
-          <div className="founder-bio">
-            <p className="founders-eyebrow">Meet the founder</p>
-            <h2 id={`${founder.id}-name`}>{founder.name}</h2>
-            <p className="founder-role">{founder.role}</p>
-            <p>{founder.bio}</p>
-            <div className="founder-profile-stats"><div><b>{founder.years}</b><span>Years of experience</span></div><div><b>{founder.credential}</b><span>{founder.detail}</span></div></div>
-          </div>
-        </section>
-      ))}
-    </div>
-  )
+      ) : null}
+      <iframe
+        ref={frameRef}
+        src="/about-founders/index.html"
+        title="About the Founders"
+        onLoad={() => { setLoaded(true); sync(); }}
+        className={`block h-[100svh] w-full border-0 transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+      />
+    </section>
+  );
 }
