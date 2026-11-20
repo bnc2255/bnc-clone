@@ -1,6 +1,8 @@
 import { Outlet, useLocation } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
+import HomeHeader from './HomeHeader'
+import HomeFooter from './HomeFooter'
 import ServiceAnswers from '../seo/ServiceAnswers'
 
 export default function Layout() {
@@ -18,12 +20,12 @@ export default function Layout() {
       >
         Skip to main content
       </a>
-      <Header variant={variant} />
+      {isLanding ? <HomeHeader /> : <Header variant={variant} />}
       <main id="main-content" tabIndex={-1} className={`outline-none ${isFounders ? 'h-full min-h-0 overflow-hidden' : 'flex-grow'} ${usesPartnerDesign ? 'pt-20' : ''}`}>
         <Outlet />
         {location.pathname !== '/virtual-cfo' && <ServiceAnswers />}
       </main>
-      {!isFounders && <Footer variant={variant} />}
+      {isLanding ? <HomeFooter /> : !isFounders && <Footer variant={variant} />}
     </div>
   )
 }
