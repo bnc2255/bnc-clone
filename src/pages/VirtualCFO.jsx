@@ -67,7 +67,7 @@ export default function VirtualCFO() {
             <RevealGroup className="vcfo-challenge-list">{challenges.map(challenge => <RevealItem key={challenge}><div><span className="vcfo-list-mark" aria-hidden="true" /><p>{challenge}</p></div></RevealItem>)}</RevealGroup>
             <Reveal><p className="vcfo-small-note">Without Virtual CFO support, businesses face higher financial and strategic risks.</p></Reveal>
           </div>
-          <Reveal className="vcfo-hierarchy"><Glass className="ob-diag-r"><img src={cfoChallenges} alt="Financial support hierarchy: bookkeeping for day-to-day operations, controllership for reporting, and CFO leadership for strategy, planning, stakeholder management, and fundraising" width="1449" height="975" loading="lazy" /><div className="vcfo-diagram-caption"><span>From day-to-day accounting to strategic decisions.</span><ShieldCheck size={19} aria-hidden="true" /></div></Glass></Reveal>
+          <Reveal className="vcfo-hierarchy"><img src={cfoChallenges} alt="Financial support hierarchy: bookkeeping for day-to-day operations, controllership for reporting, and CFO leadership for strategy, planning, stakeholder management, and fundraising" width="1449" height="975" loading="lazy" /></Reveal>
         </div>
       </section>
 
