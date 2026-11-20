@@ -67,7 +67,7 @@ try {
   await page.waitForTimeout(900)
   await page.mouse.move(550, 360)
   await page.waitForTimeout(100)
-  assert.ok(await page.locator('.ob-cell.is-on').count(), 'Hero pointer grid responds')
+  assert.equal(await page.locator('.vcfo-hero .ob-cell').count(), 0, 'Hero grid stays static on hover')
   assert.equal(await page.locator('.ob-shine').evaluate(e => getComputedStyle(e).animationName), 'ob-shine')
   assert.equal(await page.locator('.vcfo-photo-caption').evaluate(e => getComputedStyle(e, '::after').animationName), 'ob-card-shine')
   await page.locator('.vcfo-reason').first().scrollIntoViewIfNeeded()
@@ -91,6 +91,6 @@ try {
   await page.getByRole('link', { name: 'Speak with our team', exact: true }).click()
   await page.waitForURL('**/contact')
   assert.deepEqual(errors, [])
-  console.log('PASS live grid, headline and card sheen, hover motion, five independent scroll reveals, contact CTA, and no runtime errors')
+  console.log('PASS static hero grid, headline and card sheen, hover motion, five independent scroll reveals, contact CTA, and no runtime errors')
   await page.close()
 } finally { await browser.close() }

@@ -4,7 +4,8 @@
 .vcfo-page :is(a,button,summary){-webkit-tap-highlight-color:transparent}
 .vcfo-container{width:min(1240px,calc(100% - 96px));margin-inline:auto}
 .vcfo-hero{position:relative;isolation:isolate;min-height:calc(100svh - 80px);display:flex;flex-direction:column;justify-content:center;overflow:hidden;background:radial-gradient(ellipse at 9% 30%,#dbe8ff 0,transparent 48%),radial-gradient(ellipse at 100% 0%,#ece5ff 0,transparent 50%),linear-gradient(180deg,#f7f9fe,#eef3fc)}
-.vcfo-hero>.pointer-events-none{opacity:.45}
+.vcfo-hero-grid{position:absolute;inset:0 -16px;pointer-events:none;opacity:.45;mask-image:radial-gradient(ellipse 58% 52% at 50% 38%,#000 25%,transparent 78%);background-image:linear-gradient(rgba(18,87,192,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(18,87,192,.07) 1px,transparent 1px);background-size:44px 44px;background-position:center top}
+@media(min-width:768px){.vcfo-hero-grid{left:-32px;right:-32px}}
 .vcfo-hero-layout{position:relative;z-index:1;display:grid;grid-template-columns:1.12fr 1fr;align-items:center;gap:64px;padding-block:64px}
 .vcfo-hero-copy h1{margin:24px 0;font-weight:300;line-height:1.07;letter-spacing:-.045em}
 .vcfo-title-light{display:block;font-size:clamp(32px,3.4vw,50px);margin-bottom:10px;font-weight:300}

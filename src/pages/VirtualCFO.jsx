@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ArrowDown, ArrowUpRight, Check, CheckCheck, Compass, ShieldCheck } from 'lucide-react'
 import { Glass, Reveal, RevealGroup, RevealItem, SplitHeading } from './about/_shared/ui'
-import HeroBackdrop from './about/company/components/HeroBackdrop'
 import FrameworkSections from './virtual-cfo/FrameworkSections'
 import { capabilities, challenges, reasons, risks, value } from './virtual-cfo/content'
 import corridorImg from '../assets/india_saudi_corridor.webp'
@@ -25,7 +24,7 @@ export default function VirtualCFO() {
   return (
     <div className="ob vcfo-page">
       <section className="vcfo-hero" aria-labelledby="cfo-title">
-        <HeroBackdrop />
+        <div className="vcfo-hero-grid" aria-hidden="true" />
         <div className="vcfo-container vcfo-hero-layout">
           <div className="vcfo-hero-copy">
             <Reveal><span className="ob-eyebrow">The Virtual CFO network</span></Reveal>
