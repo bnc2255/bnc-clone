@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { ArrowDown, ArrowUpRight, Check, CheckCheck, Compass, ShieldCheck } from 'lucide-react'
 import { Glass, Reveal, RevealGroup, RevealItem, SplitHeading } from './about/_shared/ui'
 import HeroBackdrop from './about/company/components/HeroBackdrop'
-import FrameworkTabs from './virtual-cfo/FrameworkTabs'
+import FrameworkSections from './virtual-cfo/FrameworkSections'
 import { capabilities, challenges, reasons, risks, value } from './virtual-cfo/content'
 import corridorImg from '../assets/india_saudi_corridor.webp'
 import cfoChallenges from '../assets/cfo_challenges.png'
@@ -89,7 +89,7 @@ export default function VirtualCFO() {
 
       <section className="vcfo-section vcfo-container" aria-labelledby="cfo-framework-title">
         <SectionHeading eyebrow="How it comes together" description="Explore the fundamentals, ecosystem, delivery structure, methodology, and breadth of the Virtual CFO role."><span id="cfo-framework-title">One connected finance function.<br /><b>A framework for every stage.</b></span></SectionHeading>
-        <Reveal><FrameworkTabs /></Reveal>
+        <FrameworkSections />
       </section>
 
       <section id="cfo-capabilities" className="vcfo-section vcfo-capabilities" aria-labelledby="cfo-capabilities-title">

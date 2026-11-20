@@ -8,7 +8,7 @@ await mkdir(output, { recursive: true })
 const site = JSON.parse(await readFile('src/seo/site.json', 'utf8'))
 const validRoutes = new Set(site.routes.map(route => route.path))
 const assets = ['india_saudi_corridor', 'cfo_challenges', 'cfo_risks', 'cfo_num20', 'cfo_num21', 'cfo_num22', 'cfo_infographic1', 'cfo_infographic2', 'cfo_infographic3', 'cfo_infographic4', 'cfo_infographic5']
-const names = ['Fundamentals', 'Ecosystem', 'Execution', 'Methodology', 'CFO role']
+const frameworkIds = ['fundamentals', 'ecosystem', 'execution', 'methodology', 'coverage']
 const browser = await chromium.launch({ executablePath: process.env.PRERENDER_CHROME_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe' })
 const errors = []
 try {
@@ -23,26 +23,21 @@ try {
     assert.equal(await page.locator('footer').count(), 1)
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), width)
     for (const asset of assets) assert.ok(await page.locator(`.vcfo-page img[src*="${asset}"]`).count(), asset + ' must be retained')
-    for (const name of names) {
-      const tab = page.getByRole('tab', { name, exact: true })
-      await tab.click()
-      const id = await tab.getAttribute('aria-controls')
-      const panel = page.locator('#' + id)
-      await panel.waitFor({ state: 'visible' })
-      assert.equal(await page.getByRole('tabpanel').count(), 1)
+    assert.equal(await page.getByRole('tab').count(), 0)
+    let previousBottom = -Infinity
+    for (const id of frameworkIds) {
+      const panel = page.locator('#cfo-framework-' + id)
+      await panel.scrollIntoViewIfNeeded()
       await panel.locator('img').evaluate(image => image.decode())
+      const box = await panel.evaluate(e => ({ top: e.getBoundingClientRect().top + scrollY, bottom: e.getBoundingClientRect().bottom + scrollY }))
+      assert.ok(box.top >= previousBottom - 1, 'Framework sections appear one after another')
+      previousBottom = box.bottom
       const image = await panel.locator('img').evaluate(image => ({ loaded: image.naturalWidth > 0, fit: getComputedStyle(image).objectFit }))
       assert.ok(image.loaded)
       assert.equal(image.fit, 'contain')
+      assert.equal(await panel.locator('.vcfo-framework-copy').evaluate(e => getComputedStyle(e).opacity), '1', 'Reduced motion shows content immediately')
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), width)
     }
-    await page.getByRole('tab', { name: 'CFO role', exact: true }).press('Home')
-    assert.equal(await page.getByRole('tab', { name: 'Fundamentals', exact: true }).getAttribute('aria-selected'), 'true')
-    await page.keyboard.press('ArrowRight')
-    assert.equal(await page.getByRole('tab', { name: 'Ecosystem', exact: true }).getAttribute('aria-selected'), 'true')
-    await page.keyboard.press('End')
-    assert.equal(await page.getByRole('tab', { name: 'CFO role', exact: true }).getAttribute('aria-selected'), 'true')
-    await page.getByRole('tab', { name: 'Fundamentals', exact: true }).click()
     for (const href of await page.locator('.vcfo-page a[href^="/"]').evaluateAll(links => links.map(link => link.getAttribute('href')))) {
       if (href.startsWith('/assets/') || href.startsWith('/src/assets/')) continue
       assert.ok(validRoutes.has(href), 'Invalid destination: ' + href)
@@ -61,7 +56,7 @@ try {
     await page.evaluate(() => scrollTo(0, 0))
     await page.screenshot({ path: resolve(output, 'hero-' + width + '.png'), animations: 'disabled' })
     await page.locator('.vcfo-framework').screenshot({ path: resolve(output, 'framework-' + width + '.png'), animations: 'disabled' })
-    console.log(`PASS ${width}px: original assets, all framework tabs, keyboard navigation, FAQ, links, anchors, one scroll area, one footer, and reduced motion`)
+    console.log(`PASS ${width}px: original assets, all five stacked framework sections, FAQ, links, anchors, one scroll area, one footer, and reduced motion`)
     await page.close()
   }
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 } })
@@ -82,9 +77,20 @@ try {
   await card.hover()
   await page.waitForTimeout(600)
   assert.notEqual(await card.evaluate(e => getComputedStyle(e).transform), before, 'Card lifts on hover')
+  for (const id of frameworkIds) {
+    assert.equal(await page.locator('#cfo-framework-' + id + ' .vcfo-framework-copy').evaluate(e => getComputedStyle(e).opacity), '0', 'Section waits for scrolling before revealing')
+  }
+  for (const id of frameworkIds) {
+    const section = page.locator('#cfo-framework-' + id)
+    await section.scrollIntoViewIfNeeded()
+    await page.waitForFunction(id => {
+      const section = document.getElementById('cfo-framework-' + id)
+      return ['.vcfo-framework-copy', '.vcfo-framework-media'].every(selector => Number(getComputedStyle(section.querySelector(selector)).opacity) > 0.99)
+    }, id)
+  }
   await page.getByRole('link', { name: 'Speak with our team', exact: true }).click()
   await page.waitForURL('**/contact')
   assert.deepEqual(errors, [])
-  console.log('PASS live grid, headline and card sheen, hover motion, contact CTA, and no runtime errors')
+  console.log('PASS live grid, headline and card sheen, hover motion, five independent scroll reveals, contact CTA, and no runtime errors')
   await page.close()
 } finally { await browser.close() }
