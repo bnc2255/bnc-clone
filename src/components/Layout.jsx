@@ -7,8 +7,8 @@ export default function Layout() {
   const location = useLocation()
   const isLanding = location.pathname === '/'
   const isFounders = location.pathname === '/about/founders'
-  const isPartnerAbout = ['/about/company', '/about/founders'].includes(location.pathname)
-  const variant = isPartnerAbout ? 'partner' : isLanding ? 'landing' : 'default'
+  const usesPartnerDesign = ['/about/company', '/about/founders', '/virtual-cfo'].includes(location.pathname)
+  const variant = usesPartnerDesign ? 'partner' : isLanding ? 'landing' : 'default'
 
   return (
     <div className={`flex flex-col bg-white text-slate-800 antialiased font-sans selection:bg-[#1D67CD] selection:text-white ${isFounders ? 'h-svh overflow-hidden' : 'min-h-screen'}`}>
@@ -19,9 +19,9 @@ export default function Layout() {
         Skip to main content
       </a>
       <Header variant={variant} />
-      <main id="main-content" tabIndex={-1} className={`outline-none ${isFounders ? 'h-full min-h-0 overflow-hidden' : 'flex-grow'} ${isPartnerAbout ? 'pt-20' : ''}`}>
+      <main id="main-content" tabIndex={-1} className={`outline-none ${isFounders ? 'h-full min-h-0 overflow-hidden' : 'flex-grow'} ${usesPartnerDesign ? 'pt-20' : ''}`}>
         <Outlet />
-        <ServiceAnswers />
+        {location.pathname !== '/virtual-cfo' && <ServiceAnswers />}
       </main>
       {!isFounders && <Footer variant={variant} />}
     </div>
