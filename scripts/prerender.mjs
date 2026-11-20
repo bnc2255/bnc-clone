@@ -1,4 +1,5 @@
 import { readFile, writeFile, mkdir, stat } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { resolve, extname, dirname, sep } from 'node:path';
 import { chromium as playwright } from 'playwright-core';
@@ -21,7 +22,9 @@ const base='http://127.0.0.1:'+server.address().port;
 let browser;
 const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
 try {
-  browser=await playwright.launch({executablePath:process.env.PRERENDER_CHROME_PATH||await chromium.executablePath(),args:chromium.args,headless:true});
+  const winChrome = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
+  const chromePath = process.env.PRERENDER_CHROME_PATH || (process.platform === 'win32' && existsSync(winChrome) ? winChrome : await chromium.executablePath());
+  browser=await playwright.launch({executablePath:chromePath,args:chromium.args,headless:true});
   const context=await browser.newContext({viewport:{width:1440,height:900},reducedMotion:'reduce'});
   await context.addInitScript(()=>{window.__PRERENDER__=true;});
   // Third-party embeds/media never determine whether a public page can be published.

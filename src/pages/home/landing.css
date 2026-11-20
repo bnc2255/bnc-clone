@@ -1,0 +1,218 @@
+/* BNC Global Landing Page Scoped Stylesheet */
+
+:root {
+  --bnc-white: #FFFFFF;
+  --bnc-parchment: #F5F5F7;
+  --bnc-near-black: #1D1D1F;
+  --bnc-ink: #1D1D1F;
+  --bnc-ink-secondary: #424245;
+  --bnc-muted: #6E6E73;
+  --bnc-muted-light: #86868B;
+  --bnc-hairline: #D2D2D7;
+  --bnc-primary: #0071E3;
+  --bnc-primary-hover: #0076DF;
+  --bnc-link: #0066CC;
+  --bnc-link-on-dark: #2997FF;
+  --bnc-radius-card: 18px;
+  --bnc-radius-pill: 980px;
+  --bnc-shadow-card: 0 4px 12px 0 rgba(0, 0, 0, 0.08);
+}
+
+.bnc-landing-container {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, -apple-system, sans-serif;
+  color: var(--bnc-ink);
+  background-color: var(--bnc-white);
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography Headings */
+.bnc-hero-h1 {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", system-ui, -apple-system, sans-serif;
+  font-size: clamp(40px, 6vw, 80px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--bnc-ink);
+}
+
+.bnc-section-heading {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", system-ui, -apple-system, sans-serif;
+  font-size: clamp(32px, 4.5vw, 48px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.bnc-title-md {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", system-ui, -apple-system, sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+.bnc-body-lead {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", system-ui, -apple-system, sans-serif;
+  font-size: clamp(17px, 2vw, 21px);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--bnc-muted);
+}
+
+.bnc-body-text {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, -apple-system, sans-serif;
+  font-size: 17px;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+}
+
+/* Pill Buttons */
+.bnc-btn-pill-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--bnc-radius-pill);
+  background-color: var(--bnc-primary);
+  color: #FFFFFF;
+  padding: 11px 24px;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition: background-color 150ms ease, transform 150ms ease;
+  cursor: pointer;
+  border: none;
+}
+
+.bnc-btn-pill-primary:hover {
+  background-color: var(--bnc-primary-hover);
+}
+
+.bnc-btn-pill-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--bnc-radius-pill);
+  background-color: transparent;
+  color: var(--bnc-link);
+  border: 1px solid var(--bnc-hairline);
+  padding: 11px 24px;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition: all 150ms ease;
+  cursor: pointer;
+}
+
+.bnc-btn-pill-secondary:hover {
+  background-color: var(--bnc-primary);
+  color: #FFFFFF;
+  border-color: var(--bnc-primary);
+}
+
+.bnc-btn-pill-dark-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--bnc-radius-pill);
+  background-color: transparent;
+  color: var(--bnc-link-on-dark);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 11px 24px;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition: all 150ms ease;
+  cursor: pointer;
+}
+
+.bnc-btn-pill-dark-secondary:hover {
+  background-color: var(--bnc-link-on-dark);
+  color: #1D1D1F;
+  border-color: var(--bnc-link-on-dark);
+}
+
+/* Cards & Shadow */
+.bnc-card {
+  border-radius: var(--bnc-radius-card);
+  background-color: var(--bnc-white);
+  box-shadow: var(--bnc-shadow-card);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  transition: box-shadow 200ms ease, transform 200ms ease;
+}
+
+/* Motion & Reveals */
+/* Content is visible by default for SEO & non-JS prerendering */
+.bnc-reveal-init {
+  opacity: 1;
+  transform: none;
+}
+
+/* When JS enhances motion, unrevealed elements take this class */
+.bnc-reveal-pending {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 500ms cubic-bezier(0.16, 1, 0.3, 1), transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.bnc-reveal-pending.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero copy 600ms reveal */
+.bnc-hero-reveal {
+  animation: bncHeroReveal 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes bncHeroReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Carousel crossfade */
+.bnc-carousel-slide {
+  transition: opacity 250ms ease-in-out;
+}
+
+/* Sticky storytelling crossfade */
+.bnc-chapter-card {
+  transition: opacity 300ms ease, border-color 300ms ease, background-color 300ms ease;
+}
+
+/* FAQ accordion animation */
+.bnc-faq-content {
+  overflow: hidden;
+  transition: max-height 200ms cubic-bezier(0.16, 1, 0.3, 1), opacity 200ms ease;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .bnc-hero-reveal,
+  .bnc-reveal-pending {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .bnc-carousel-slide,
+  .bnc-chapter-card,
+  .bnc-faq-content {
+    transition: none !important;
+  }
+}

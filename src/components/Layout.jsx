@@ -1,9 +1,13 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
 import ServiceAnswers from '../seo/ServiceAnswers'
 
 export default function Layout() {
+  const location = useLocation()
+  const isLanding = location.pathname === '/'
+  const variant = isLanding ? 'landing' : 'default'
+
   return (
     <div className="flex flex-col min-h-screen bg-white text-slate-800 antialiased font-sans selection:bg-[#1D67CD] selection:text-white">
       <a
@@ -12,12 +16,12 @@ export default function Layout() {
       >
         Skip to main content
       </a>
-      <Header />
+      <Header variant={variant} />
       <main id="main-content" tabIndex={-1} className="flex-grow outline-none">
         <Outlet />
         <ServiceAnswers />
       </main>
-      <Footer />
+      <Footer variant={variant} />
     </div>
   )
 }

@@ -8,6 +8,8 @@ import Home from './pages/Home'
 import VirtualCFO from './pages/VirtualCFO'
 import Services from './pages/Services'
 import AboutUs from './pages/AboutUs'
+import AboutCompanyPage from './pages/about/AboutCompanyPage'
+import AboutFounders from './pages/AboutFounders'
 import Contact from './pages/Contact'
 import Careers from './pages/Careers'
 import CareersSubPage from './pages/CareersSubPage'
@@ -107,6 +109,8 @@ function App() {
           <Route path="about-us/meet-our-team" element={<MeetOurTeam />} />
           <Route path="bnc-global-services" element={<Services />} />
           <Route path="about-us" element={<AboutUs />} />
+          <Route path="about/company" element={<AboutCompanyPage />} />
+          <Route path="about/founders" element={<AboutFounders />} />
           <Route path="contact" element={<Contact />} />
           <Route path="privacy-policy" element={<PrivacyPolicy />} />
           <Route path="careers" element={<Careers />} />

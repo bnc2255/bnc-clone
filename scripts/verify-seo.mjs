@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import {readFile,stat} from 'node:fs/promises';
+import {existsSync} from 'node:fs';
 import {resolve,extname,sep} from 'node:path';
 import {createServer} from 'node:http';
 import {chromium as playwright} from 'playwright-core';
@@ -37,7 +38,9 @@ try{
  const missing=await fetch(base+'/definitely-missing-audit-page');assert.equal(missing.status,404);
  for(const [from,to] of Object.entries(site.redirects)){const r=await fetch(base+from,{redirect:'manual'});assert.equal(r.status,308);assert.equal(r.headers.get('location'),to);assert.ok(to.startsWith('https://') || site.routes.some(p=>p.path===to),'Redirect destination '+to);}
  assert.match(await (await fetch(base+'/robots.txt')).text(),/Sitemap:/);
- browser=await playwright.launch({executablePath:process.env.PRERENDER_CHROME_PATH||await chromium.executablePath(),args:chromium.args,headless:true});
+ const winChrome = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
+ const chromePath = process.env.PRERENDER_CHROME_PATH || (process.platform === 'win32' && existsSync(winChrome) ? winChrome : await chromium.executablePath());
+ browser=await playwright.launch({executablePath:chromePath,args:chromium.args,headless:true});
  const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}});
  for(const route of [site.routes[0],site.routes.find(p=>p.type==='service'),site.routes.find(p=>p.type==='post'),site.routes.find(p=>p.path==='/ar')].filter(Boolean)){
   const page=await context.newPage();await page.goto(base+route.path);assert.ok((await page.locator('#root').innerText()).length>120,route.path+' readable without JS');assert.ok(await page.locator('h1').count());if(process.env.SEO_SCREENSHOT_DIR) await page.screenshot({path:resolve(process.env.SEO_SCREENSHOT_DIR,site.name.replace(/[^a-z0-9]/gi,'-')+route.path.replace(/[^a-z0-9]/gi,'-')+'.png')});await page.close();

@@ -280,13 +280,46 @@
       "type": "service"
     },
     {
+      "path": "/about/company",
+      "title": "About Our Company",
+      "description": "Explore BNC Global Consultech: our company, leadership, finance, risk, privacy, sustainability and technology practices, brands, partners and offices.",
+      "type": "page"
+    },
+    {
+      "path": "/about/founders",
+      "title": "About Our Founders",
+      "description": "Meet CA Gurvinder Pal Singh and CA Summit Goyal, the founders of BNC Global, bringing Big 4 discipline to consulting and business growth.",
+      "type": "page",
+      "image": "/about-founders/assets/founders-duo.png"
+    },
+    {
+      "path": "/blog/saudi-arabia-s-cybersecurity-compliance-landscape-what-businesses-need-to-know",
+      "title": "Saudi Arabia Cybersecurity Compliance: NCA Regulations and Updates",
+      "description": "Discover Saudi Arabia’s updated NCA cybersecurity requirements, including ECC-2:2024, CCC-2:2024, NCNICC-1:2025, enforcement powers, and business compliance obligations.",
+      "type": "post",
+      "author": "Divya Sindhi",
+      "published": "2026-11-17 00:00",
+      "modified": "2026-11-17T10:30:14.368Z",
+      "image": "https://a.storyblok.com/f/294961171213522/1920x1080/2a6d8e0d02/website-blig.png"
+    },
+    {
+      "path": "/blog/ksa-vat-refund-claims-for-non-resident-businesses-understanding-the-30-june-2026-deadline",
+      "title": "KSA VAT Refund Claims for Non-Resident Businesses: 2026 Guide",
+      "description": "Learn how non-resident businesses can claim Saudi Arabia VAT refunds, understand eligibility requirements, required documents, and the 30 June 2026 filing deadline.",
+      "type": "post",
+      "author": "divya sindhi",
+      "published": "2026-11-11 00:00",
+      "modified": "2026-11-11T06:35:20.929Z",
+      "image": "https://a.storyblok.com/f/294961171213522/1920x1080/20699324b6/1212.png"
+    },
+    {
       "path": "/blog/saudi-arabia-s-zatca-introduces-annual-disclosure-requirements-for-regional-headquarters-in-2026",
       "title": "Saudi Arabia's ZATCA Introduces Annual Disclosure Requirements for Regional Headquarters in 2026",
       "description": "Learn about Saudi Arabia's new ZATCA Annual Disclosure Form for Regional Headquarters, including filing requirements, documentation, compliance risks, and potential penalties of up to SAR 400,000.",
       "type": "post",
       "author": "Divya sindhi ",
       "published": "2026-10-30 00:00",
-      "modified": "2026-10-30T10:55:02.184Z",
+      "modified": "2026-11-10T10:03:24.322Z",
       "image": "https://a.storyblok.com/f/294961171213522/1239x703/dc9a9d5363/screenshot_2026-10-30-16-03-50-23_965bbf4d18d205f782c6b8409c5773a4.jpg"
     },
     {
@@ -456,7 +489,8 @@
     "/elevate": "https://elevate.bncglobal.in/",
     "/careers/elevate": "https://elevate.bncglobal.in/",
     "/careers/transforming-professionals": "/transforming-professionals",
-    "/careers/communities": "/communities"
+    "/careers/communities": "/communities",
+    "/about/comapny": "/about/company"
   },
   "privateRoutes": [],
   "sameAs": [
