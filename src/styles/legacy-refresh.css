@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+/* Shared visual language for the existing service, country and company pages. */
+.bnc-refresh {
+  --bnc-ink: #0d1b3d;
+  --bnc-body: #3f4b66;
+  --bnc-muted: #6b7590;
+  --bnc-blue: #1257c0;
+  --bnc-line: rgba(13, 27, 61, .1);
+  color: var(--bnc-ink);
+  background: #fff;
+  font-family: Manrope, Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+.bnc-refresh :is(a, button, input, select, textarea, summary):focus-visible {
+  outline: 3px solid var(--bnc-blue);
+  outline-offset: 4px;
+}
+
+.bnc-refresh :is(a, button) { -webkit-tap-highlight-color: transparent; }
+
+.bnc-refresh :is(h1, h2, h3, h4) {
+  font-family: Manrope, Inter, system-ui, sans-serif;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
+
+.bnc-refresh h1 {
+  max-width: 20ch;
+  font-size: clamp(38px, 5.1vw, 68px) !important;
+  font-weight: 300 !important;
+  line-height: 1.07 !important;
+  letter-spacing: -.05em !important;
+}
+
+.bnc-refresh h1 strong,
+.bnc-refresh h1 b { font-weight: 700; }
+
+.bnc-refresh h2 {
+  font-size: clamp(28px, 3.5vw, 46px) !important;
+  font-weight: 300 !important;
+  line-height: 1.12 !important;
+}
+
+.bnc-refresh h2 strong,
+.bnc-refresh h2 b,
+.bnc-refresh h3 { font-weight: 700; }
+
+.bnc-refresh :is(p, li) {
+  font-family: Manrope, Inter, system-ui, sans-serif;
+  line-height: 1.8;
+}
+
+.bnc-refresh > div > section:first-of-type {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-bottom: 1px solid #dce5f3;
+  background-color: #f5f8ff;
+  background-image:
+    linear-gradient(rgba(18, 87, 192, .025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(18, 87, 192, .025) 1px, transparent 1px),
+    radial-gradient(ellipse at 12% 15%, #dfebff8a 0, transparent 48%),
+    radial-gradient(ellipse at 92% 80%, #eee9ff80 0, transparent 46%),
+    linear-gradient(180deg, #f8faffdf, #eef3fcf0),
+    var(--bnc-hero-image, none) !important;
+  background-size: 64px 64px, 64px 64px, auto, auto, cover, cover;
+  background-position: center;
+  color: var(--bnc-ink);
+}
+
+/* Legacy heroes often used a full-strength navy overlay over their photo.
+   The refreshed light hero treatment keeps the original photo while removing
+   that overlay so the shared dark-ink typography stays legible. */
+.bnc-refresh > div > section:first-of-type > div[class*="absolute"][class*="inset-0"] {
+  background-color: transparent !important;
+  opacity: .13;
+}
+
+.bnc-refresh > div > section:first-of-type :is(h1, h2, h3) { color: var(--bnc-ink) !important; }
+.bnc-refresh > div > section:first-of-type p { color: var(--bnc-body) !important; }
+.bnc-refresh--services > div > section:first-of-type > div[class*="absolute"][class*="inset-0"] {
+  opacity: 1;
+}
+.bnc-refresh--services > div > section:first-of-type > div[class*="absolute"][class*="inset-0"] > div[class*="bg-slate-950"] {
+  background-color: rgba(10, 20, 48, .48) !important;
+}
+.bnc-refresh--services > div > section:first-of-type :is(h1, h2, h3) { color: #fff !important; }
+.bnc-refresh--services > div > section:first-of-type p { color: #e4ecf9 !important; }
+
+.bnc-refresh--communities > div > section:first-of-type h1 { color: #9bc5ff !important; }
+.bnc-refresh--communities > div > section:first-of-type p { color: #e4ecf9 !important; }
+
+.bnc-refresh--contact > div > section:first-of-type > div[class*="absolute"][class*="inset-0"] {
+  opacity: 1;
+}
+.bnc-refresh--contact > div > section:first-of-type > div[class*="absolute"][class*="inset-0"] > div[class*="bg-slate-950"] {
+  background-color: rgba(10, 20, 48, .42) !important;
+}
+.bnc-refresh--contact > div > section:first-of-type :is(h1, h2, h3) { color: #fff !important; }
+.bnc-refresh--contact > div > section:first-of-type p { color: #e4ecf9 !important; }
+
+.bnc-refresh > div > section:first-of-type a[class*="rounded-full"][class*="bg-"] {
+  min-height: 48px;
+  padding: 12px 23px;
+  border: 1px solid #1257c0;
+  border-radius: 999px;
+  background: #1257c0 !important;
+  color: #fff !important;
+  box-shadow: 0 10px 26px #1257c02e;
+  transition: background .25s, box-shadow .25s, transform .25s;
+}
+.bnc-refresh > div > section:first-of-type a[class*="rounded-full"][class*="bg-"]:hover {
+  background: #0e49a3 !important;
+  box-shadow: 0 14px 30px #1257c03b;
+  transform: translateY(-1px);
+}
+
+.bnc-refresh :is(section, article) img:not([width]):not([height]) {
+  max-width: 100%;
+}
+
+.bnc-refresh img[class*="rounded"] {
+  border-radius: 18px;
+}
+
+.bnc-refresh [class*="rounded-2xl"],
+.bnc-refresh [class*="rounded-3xl"] {
+  border-radius: 18px;
+}
+
+.bnc-refresh [class*="shadow-lg"],
+.bnc-refresh [class*="shadow-md"] {
+  box-shadow: 0 18px 44px -28px rgba(13, 27, 61, .28);
+}
+
+.bnc-refresh a[class*="rounded-full"][class*="bg-"]:not(:first-child) {
+  transition: background-color .25s, box-shadow .25s, transform .25s;
+}
+
+.bnc-refresh :is(input, select, textarea) {
+  min-height: 46px;
+  border-color: #d4deed;
+  border-radius: 12px;
+  color: var(--bnc-ink);
+  font: inherit;
+}
+.bnc-refresh :is(input, select, textarea):focus {
+  border-color: var(--bnc-blue);
+  box-shadow: 0 0 0 3px #1257c01a;
+}
+
+.bnc-refresh .bnc-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .55s cubic-bezier(.2,.7,.1,1) var(--bnc-reveal-delay, 0ms),
+              transform .55s cubic-bezier(.2,.7,.1,1) var(--bnc-reveal-delay, 0ms);
+}
+.bnc-refresh .bnc-reveal.bnc-revealed { opacity: 1; transform: translateY(0); }
+
+.bnc-not-found {
+  background:
+    radial-gradient(ellipse at 12% 18%, #dce9ff 0, transparent 42%),
+    radial-gradient(ellipse at 90% 78%, #eee8ff 0, transparent 40%),
+    linear-gradient(180deg, #f8faff, #eef3fc);
+}
+.bnc-not-found-grid {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .48;
+  background-image: linear-gradient(#1257c00b 1px, transparent 1px), linear-gradient(90deg, #1257c00b 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 54% 64% at 50% 50%, #000 16%, transparent 86%);
+}
+.bnc-not-found h1 { max-width: none; font-size: clamp(80px, 12vw, 148px) !important; font-weight: 700 !important; }
+.bnc-not-found h1 span { margin-top: 12px; font-size: clamp(28px, 4vw, 52px); font-weight: 300; letter-spacing: -.02em !important; }
+
+@media (max-width: 767px) {
+  .bnc-refresh > div > section:first-of-type { padding-block: 64px; }
+  .bnc-refresh h1 { font-size: clamp(34px, 10vw, 46px) !important; }
+  .bnc-refresh h2 { font-size: clamp(26px, 7.5vw, 34px) !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bnc-refresh *, .bnc-refresh *::before, .bnc-refresh *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  .bnc-refresh .bnc-reveal { opacity: 1; transform: none; }
+}

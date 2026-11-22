@@ -132,10 +132,8 @@ function App() {
           <Route path="countries-we-serve/saudi-arabia" element={<SaudiArabia />} />
           <Route path="countries-we-serve/uae" element={<UAE />} />
           <Route path="countries-we-serve/:countrySlug" element={<CountryDetail />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
-
-        {/* 404 Route outside Layout */}
-        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   )
