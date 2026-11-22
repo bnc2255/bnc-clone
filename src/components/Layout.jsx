@@ -1,16 +1,13 @@
 import { Outlet, useLocation } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
-import HomeHeader from './HomeHeader'
-import HomeFooter from './HomeFooter'
 import ServiceAnswers from '../seo/ServiceAnswers'
 
 export default function Layout() {
   const location = useLocation()
-  const isLanding = location.pathname === '/'
   const isFounders = location.pathname === '/about/founders'
-  const usesPartnerDesign = ['/about/company', '/about/founders', '/virtual-cfo'].includes(location.pathname)
-  const variant = usesPartnerDesign ? 'partner' : isLanding ? 'landing' : 'default'
+  const usesPartnerDesign = ['/', '/about/company', '/about/founders', '/virtual-cfo'].includes(location.pathname)
+  const variant = usesPartnerDesign ? 'partner' : 'default'
 
   return (
     <div className={`flex flex-col bg-white text-slate-800 antialiased font-sans selection:bg-[#1D67CD] selection:text-white ${isFounders ? 'h-svh overflow-hidden' : 'min-h-screen'}`}>
@@ -20,12 +17,12 @@ export default function Layout() {
       >
         Skip to main content
       </a>
-      {isLanding ? <HomeHeader /> : <Header variant={variant} />}
+      <Header variant={variant} />
       <main id="main-content" tabIndex={-1} className={`outline-none ${isFounders ? 'h-full min-h-0 overflow-hidden' : 'flex-grow'} ${usesPartnerDesign ? 'pt-20' : ''}`}>
         <Outlet />
         {location.pathname !== '/virtual-cfo' && <ServiceAnswers />}
       </main>
-      {isLanding ? <HomeFooter /> : !isFounders && <Footer variant={variant} />}
+      {!isFounders && <Footer variant={variant} />}
     </div>
   )
 }

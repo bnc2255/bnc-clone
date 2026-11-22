@@ -12,6 +12,7 @@
     "test:seo": "node scripts/verify-seo.mjs",
     "test:about-parity": "node tests/verify-about-parity.mjs",
     "test:virtual-cfo": "node tests/verify-virtual-cfo.mjs",
+    "test:home": "node tests/verify-home-redesign.mjs",
     "test:careers": "node --test tests/career-application.test.mjs"
   },
   "dependencies": {
