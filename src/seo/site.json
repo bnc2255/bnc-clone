@@ -274,6 +274,12 @@
       "type": "service"
     },
     {
+      "path": "/countries-we-serve/saudi-arabia-pdfs",
+      "title": "Saudi Arabia PDFs",
+      "description": "Download Saudi Arabia’s 2027 Budget as a PDF from BNC Global.",
+      "type": "page"
+    },
+    {
       "path": "/countries-we-serve/uae",
       "title": "Taxation Laws in UAE",
       "description": "Understand the tax framework, compliance requirements, and business setup essentials for operating in the United Arab Emirates.",
@@ -291,6 +297,16 @@
       "description": "Meet CA Gurvinder Pal Singh and CA Summit Goyal, the founders of BNC Global, bringing Big 4 discipline to consulting and business growth.",
       "type": "page",
       "image": "/about-founders/assets/founders-duo.png"
+    },
+    {
+      "path": "/blog/saudi-arabia-esg-landscape-2026-financial-risks-business-strategy",
+      "title": "Saudi Arabia ESG Landscape 2026: Financial Risks & Business Strategy",
+      "description": "Explore Saudi Arabia's ESG landscape in 2026, including financial risks, climate challenges, ESG reporting, sustainable finance, and Vision 2030.",
+      "type": "post",
+      "author": "Divya Sindhi",
+      "published": "2026-11-23 00:00",
+      "modified": "2026-11-23T18:06:06.531Z",
+      "image": "https://a.storyblok.com/f/294961171213522/1920x1080/81bb2f93d5/untitled-design-43.png"
     },
     {
       "path": "/blog/saudi-arabia-s-cybersecurity-compliance-landscape-what-businesses-need-to-know",

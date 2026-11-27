@@ -105,6 +105,14 @@ export default function SaudiArabia() {
             >
               Learn more <ArrowRight className="w-5 h-5" />
             </a>
+            <div>
+              <Link
+                to="/countries-we-serve/saudi-arabia-pdfs"
+                className="inline-flex items-center gap-2 text-[18px] font-display font-semibold text-[#1D67CD] hover:text-[#0B2F5B] transition-colors"
+              >
+                Saudi Arabia PDFs <ArrowRight className="w-5 h-5" aria-hidden="true" />
+              </Link>
+            </div>
           </div>
 
           <div className="w-full lg:w-[500px] flex justify-center lg:justify-end">
