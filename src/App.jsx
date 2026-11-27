@@ -17,6 +17,7 @@ import NotFound from './pages/NotFound'
 import Australia from './pages/Australia'
 import Canada from './pages/Canada'
 import SaudiArabia from './pages/SaudiArabia'
+import SaudiArabiaPdfs from './pages/SaudiArabiaPdfs'
 import UAE from './pages/UAE'
 import Communities from './pages/Communities'
 import TransformingProfessionals from './pages/TransformingProfessionals'
@@ -126,6 +127,7 @@ function App() {
           <Route path="countries-we-serve/australia" element={<Australia />} />
           <Route path="countries-we-serve/canada" element={<Canada />} />
           <Route path="countries-we-serve/saudi-arabia" element={<SaudiArabia />} />
+          <Route path="countries-we-serve/saudi-arabia-pdfs" element={<SaudiArabiaPdfs />} />
           <Route path="countries-we-serve/uae" element={<UAE />} />
           <Route path="countries-we-serve/:countrySlug" element={<CountryDetail />} />
         </Route>
