@@ -86,7 +86,7 @@ export default function SaudiArabiaPdfs() {
             <h1>Saudi Arabia Budget Dashboard</h1>
             <p>Explore public finances from the 2024 actuals through the 2027 budget.</p>
           </div>
-          <a className="budget-download" href="/pdfs/saudi-arabias-2027-budget.pdf" download="Saudi Arabia’s 2027 Budget.pdf">
+          <a className="budget-download" href="/pdfs/bnc-budget-publication-2027.pdf" download="BNC Budget Publication 2027.pdf">
             <Download size={20} aria-hidden="true" /> Download Complete Brief
           </a>
         </header>
